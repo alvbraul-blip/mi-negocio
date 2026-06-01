@@ -35,6 +35,11 @@ function actualizarCarrito() {
 
     const item = document.createElement("div");
 
+    item.style.color = "white";
+    item.style.marginBottom = "10px";
+    item.style.border = "1px solid white";
+    item.style.padding = "10px";
+
     item.innerHTML = `
       Producto - $${precio}
       <button onclick="eliminarProducto(${index})">
