@@ -1,3 +1,4 @@
+let carrito = [];
 let total = 0;
 
 // 🛒 Agregar producto
@@ -9,17 +10,46 @@ function agregarAlCarrito(precio) {
     return;
   }
 
-  total += precio;
+  // Guardamos producto
+  carrito.push(precio);
 
-  actualizarTotal();
+  actualizarCarrito();
 }
 
-// 🔄 Actualiza el texto del total
-function actualizarTotal() {
-  document.getElementById("total").innerText = "Total: $" + total;
+// ❌ Eliminar producto
+function eliminarProducto(index) {
+  carrito.splice(index, 1);
+  actualizarCarrito();
 }
 
-// 💳 Comprar (tu integración)
+// 🔄 Actualizar carrito y total
+function actualizarCarrito() {
+  const lista = document.getElementById("lista-carrito");
+
+  lista.innerHTML = "";
+
+  total = 0;
+
+  carrito.forEach((precio, index) => {
+    total += precio;
+
+    const item = document.createElement("div");
+
+    item.innerHTML = `
+      Producto - $${precio}
+      <button onclick="eliminarProducto(${index})">
+        Eliminar
+      </button>
+    `;
+
+    lista.appendChild(item);
+  });
+
+  document.getElementById("total").innerText =
+    "Total: $" + total;
+}
+
+// 💳 Comprar
 async function comprar() {
   try {
     if (total <= 0) {
@@ -27,17 +57,21 @@ async function comprar() {
       return;
     }
 
-    const response = await fetch("https://mi-negocio-c6ep.onrender.com/crear-preferencia", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        precio: total
-      })
-    });
+    const response = await fetch(
+      "https://mi-negocio-c6ep.onrender.com/crear-preferencia",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          precio: total
+        })
+      }
+    );
 
     const data = await response.json();
+
     if (!data.id) {
       throw new Error("No se recibió ID");
     }
