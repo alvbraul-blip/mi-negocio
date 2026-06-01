@@ -35,21 +35,29 @@ app.post("/crear-preferencia", async (req, res) => {
     const preference = new Preference(client);
 
     const response = await preference.create({
-      body: {
-        items: [
-          {
-            title: "Compra Avibess Closet",
-            unit_price: Number(precio),
-            quantity: 1,
-            currency_id: "MXN"
-          }
-        ]
+  body: {
+    items: [
+      {
+        title: "Compra Avibess Closet",
+        unit_price: Number(precio),
+        quantity: 1,
+        currency_id: "MXN"
       }
-    });
+    ],
 
-    console.log("Preferencia creada:", response.id);
+    back_urls: {
+      success: "https://avibes-closet.netlify.app/exito.html",
+      failure: "https://avibes-closet.netlify.app/error.html",
+      pending: "https://avibes-closet.netlify.app/pendiente.html"
+    },
 
-    res.json({ id: response.id });
+    auto_return: "approved"
+  }
+});
+
+console.log("Preferencia creada:", response.id);
+
+res.json({ id: response.id });
 
   } catch (error) {
     console.error("ERROR MP:", error);
