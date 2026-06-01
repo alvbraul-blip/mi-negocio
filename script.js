@@ -27,7 +27,7 @@ async function comprar() {
       return;
     }
 
-    const response = await fetch("http://mi-negocio-c6ep.onrender.com/crear-preferencia", {
+    const response = await fetch("https://mi-negocio-c6ep.onrender.com/crear-preferencia", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
