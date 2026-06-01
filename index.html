@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>A.vibess Closet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>A.vibess Closet</h1>
+<p>No se trata solo de ropa si no de lo que provoca 🔥</p>
+
+<section class="productos">
+
+  <div class="producto">
+    <img src="Lenceria.jpeg" alt="Lenceria negra">
+    <h2>Set lenceria sin varilla negro</h2>
+    <p>$239</p>
+    <button onclick="agregarAlCarrito(239)">Agregar al carrito</button>
+  </div>
+
+  <div class="producto">
+    <img src="Lenceri.jpeg" alt="Lenceria rosa">
+    <h2>Set lenceria sin varilla rosa</h2>
+    <p>$239</p>
+    <button onclick="agregarAlCarrito(239)">Agregar al carrito</button>
+  </div>
+
+</section>
+
+<div class="carrito">
+  <h2>🛒 Carrito</h2>
+  <p id="total">Total: $0</p>
+  <button onclick="comprar()">Finalizar compra</button>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
